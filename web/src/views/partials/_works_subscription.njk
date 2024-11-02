@@ -1,0 +1,59 @@
+<div class="container mb-3 subscription" id="subscription-work-{{ sub.id }}">
+    <div class="row mb-2">
+        <h2 id="subscription-work-{{ sub.id }}-title">{{ sub.title }}</h2>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md">
+            {% for fandom in sub.fandoms %}
+                <span class="badge rounded-pill text-bg-secondary {{ sub.id }}-fandom">{{ fandom }}</span>
+            {% endfor %}
+        </div>
+        <div class="col-md">
+            {% for category in sub.categories %}
+                <span class="badge rounded-pill text-bg-light {{ sub.id }}-category">{{ category }}</span>
+            {% endfor %}
+            {% for warning in sub.warnings %}
+                <span class="badge rounded-pill text-bg-warning {{ sub.id }}-warning">{{ warning }}</span>
+            {% endfor %}
+            <span class="badge rounded-pill text-bg-danger {{ sub.id }}-rating">{{ sub.rating }}</span>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md">
+            {% for character in sub.characters %}
+                <span class="badge rounded-pill text-bg-primary {{ sub.id }}-character">{{ character }}</span>
+            {% endfor %}
+        </div>
+        <div class="col-md">
+            {% for relation in sub.relationships %}
+                <span class="badge rounded-pill text-bg-success {{ sub.id }}-relationship">{{ relation }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md">
+            {% for tag in sub.tags %}
+                <span class="badge rounded-pill text-bg-secondary {{ sub.id }}-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md">
+            <p id="subscription-work-{{ sub.id }}-summary">{{ sub.summary }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md">
+            <span class="{{ sub.id }}-word-count">{{ sub.words }}</span> words
+        </div>
+        <div class="col-md">
+            <span class="{{ sub.id }}-kudos-count">{{ sub.kudos }}</span> kudos
+        </div>
+        <div class="col-md">
+            <span class="badge rounded-pill text-bg-success {{ sub.id }}-status">{{ sub.status }}</span>
+        </div>
+        <div class="col-md text-end">
+            <a href="{{ sub.url }}" id="{{ sub.id }}-ao3-link">Link to Ao3</a>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 .idea/
 *.iml
 
-subs.json
+web/node_modules
 
 ### Linux template
 *~
@@ -163,7 +163,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/

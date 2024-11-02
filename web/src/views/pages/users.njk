@@ -1,0 +1,23 @@
+{% extends "layouts/root.njk" %}
+
+{% block content %}
+    <h1>Ao3 subscription list - Users</h1>
+
+    <p>
+        This is a collection of all subscriptions for works associated with an Ao3 account and the
+        stories that they represent, since Ao3 does not provide any on-screen information for how
+        subscriptions relate to stories.
+    </p>
+
+    <div id="filters" class="container">
+        <p>No filters available for users at this moment.</p>
+    </div>
+
+    <div id="subscriptions">
+        {% for sub in subscriptions.users %}
+            {% include "partials/_users_subscription.njk" %}
+        {% else %}
+            <p>No users found in the data document.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

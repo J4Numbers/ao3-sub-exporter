@@ -1,0 +1,25 @@
+{
+  "name": "ao3_exporter_web",
+  "version": "1.0.0",
+  "description": "A web viewer for Ao3 exporter data files",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Archive of our Own",
+    "Ao3",
+    "Subscriptions",
+    "Fanfiction"
+  ],
+  "author": "J4Numbers <j4numbers@gmail.com>",
+  "license": "0BSD",
+  "dependencies": {
+    "bootstrap": "5.3.3",
+    "bootstrap-icons": "1.11.3",
+    "dotenv": "^16.4.5",
+    "express": "4.21.1",
+    "nunjucks": "3.2.4"
+  }
+}

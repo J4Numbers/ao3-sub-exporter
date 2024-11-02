@@ -1,0 +1,27 @@
+{% extends "layouts/root.njk" %}
+
+{% block content %}
+    <h1>Ao3 subscription list - Works</h1>
+
+    <p>
+        This is a collection of all subscriptions for works associated with an Ao3 account and the
+        stories that they represent, since Ao3 does not provide any on-screen information for how
+        subscriptions relate to stories.
+    </p>
+
+    <div id="filters" class="container">
+        {% include "partials/_filters.njk" %}
+    </div>
+
+    <div id="subscriptions">
+        {% for sub in subscriptions.works %}
+            {% include "partials/_works_subscription.njk" %}
+        {% else %}
+            <p>No works found in the data document.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block endscript %}
+    {% include "scripts/work-filtering.js" %}
+{% endblock %}

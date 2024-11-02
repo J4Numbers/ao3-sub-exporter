@@ -1,0 +1,15 @@
+<div class="container mb-3 subscription" id="subscription-series-{{ sub.id }}">
+    <div class="row mb-2">
+        <h2 id="subscription-series-{{ sub.id }}-title">{{ sub.name }}</h2>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md">
+            <p id="subscription-series-{{ sub.id }}-description">{{ sub.description }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md text-end">
+            <a href="{{ sub.url }}" id="{{ sub.id }}-ao3-link">Link to Ao3</a>
+        </div>
+    </div>
+</div>
