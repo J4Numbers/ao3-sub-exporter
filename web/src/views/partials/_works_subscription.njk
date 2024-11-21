@@ -1,6 +1,14 @@
 <div class="container mb-3 subscription" id="subscription-work-{{ sub.id }}">
     <div class="row mb-2">
-        <h2 id="subscription-work-{{ sub.id }}-title">{{ sub.title }}</h2>
+        <h2 id="subscription-work-{{ sub.id }}-title">
+            {{ sub.title }}
+            {% if sub.bookmarked %}
+                <span class="badge rounded-pill bg-success {{ sub.id }}-bookmarked">Bookmarked</span>
+            {% endif %}
+            {% if sub.subscribed %}
+                <span class="badge rounded-pill bg-primary {{ sub.id }}-subscribed">Subscribed</span>
+            {% endif %}
+        </h2>
     </div>
     <div class="row mb-2">
         <div class="col-md">

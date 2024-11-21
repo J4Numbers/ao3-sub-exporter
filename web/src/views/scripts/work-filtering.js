@@ -22,6 +22,8 @@ function collapseClassListItems(lookupClass) {
 
 function gatherAvailableFilters() {
   const allFilters = {
+    bookmarked: true,
+    subscribed: true,
     fandoms: [],
     characters: [],
     relationships: [],
@@ -90,6 +92,8 @@ function gatherWorkDetails() {
     ongoingWorkCollection.push({
       id: workId,
       title: document.getElementById(`subscription-work-${workId}-title`).textContent,
+      bookmarked: document.getElementsByClassName(`${workId}-bookmarked`).length > 0,
+      subscribed: document.getElementsByClassName(`${workId}-subscribed`).length > 0,
       fandoms: collapseClassListItems(`${workId}-fandom`),
       characters: collapseClassListItems(`${workId}-character`),
       relationships: collapseClassListItems(`${workId}-relationship`),
@@ -111,6 +115,24 @@ function gatherWorkDetails() {
 function renderFilters(filters, anchorId, actionFn) {
   const availableFiltersAnchor = document.getElementById(anchorId);
   availableFiltersAnchor.innerHTML = "";
+
+  if (filters.bookmarked) {
+    let bookmarkedNode = document.createElement("span")
+    bookmarkedNode.classList.add("badge", "rounded-pill", "text-bg-success");
+    bookmarkedNode.addEventListener("click",
+      (_ev) => actionFn("bookmarked", true));
+    bookmarkedNode.textContent = "Bookmarked";
+    availableFiltersAnchor.appendChild(bookmarkedNode);
+  }
+
+  if (filters.subscribed) {
+    let subscribedNode = document.createElement("span")
+    subscribedNode.classList.add("badge", "rounded-pill", "text-bg-primary");
+    subscribedNode.addEventListener("click",
+      (_ev) => actionFn("subscribed", true));
+    subscribedNode.textContent = "Subscribed";
+    availableFiltersAnchor.appendChild(subscribedNode);
+  }
 
   filters.fandoms.forEach((fandom) => {
     let fandomNode = document.createElement("span");
@@ -165,6 +187,12 @@ function renderActiveFilters() {
 function applyFilters() {
   for (let workX=0; workX<workDetails.length; ++workX) {
     let show = true;
+    if (activeFilters.bookmarked) {
+      show = show && workDetails[workX].bookmarked;
+    }
+    if (activeFilters.subscribed) {
+      show = show && workDetails[workX].subscribed;
+    }
     for (let fandomFilterX=0; fandomFilterX<activeFilters.fandoms.length; ++fandomFilterX) {
       show = show && workDetails[workX].fandoms.includes(activeFilters.fandoms[fandomFilterX]);
     }
@@ -193,6 +221,8 @@ function applyFilters() {
 
 const workDetails = gatherWorkDetails();
 const activeFilters = {
+  bookmarked: false,
+  subscribed: false,
   fandoms: [],
   characters: [],
   relationships: [],
@@ -207,9 +237,13 @@ renderAvailableFilters();
 
 
 function addToActiveFilters(filterType, filter) {
-  const index = activeFilters[filterType].indexOf(filter);
-  if (index === -1) {
-    activeFilters[filterType].push(filter);
+  if (typeof activeFilters[filterType] === "boolean") {
+    activeFilters[filterType] = true
+  } else if (activeFilters[filterType] instanceof Array) {
+    const index = activeFilters[filterType].indexOf(filter);
+    if (index === -1) {
+      activeFilters[filterType].push(filter);
+    }
   }
   renderActiveFilters();
   applyFilters();
@@ -217,9 +251,13 @@ function addToActiveFilters(filterType, filter) {
 }
 
 function removeFromActiveFilters(filterType, filter) {
-  const index = activeFilters[filterType].indexOf(filter);
-  if (index > -1) {
-    activeFilters[filterType].splice(index, 1);
+  if (typeof activeFilters[filterType] === "boolean") {
+    activeFilters[filterType] = false
+  } else if (activeFilters[filterType] instanceof Array) {
+    const index = activeFilters[filterType].indexOf(filter);
+    if (index > -1) {
+      activeFilters[filterType].splice(index, 1);
+    }
   }
   renderActiveFilters();
   applyFilters();
